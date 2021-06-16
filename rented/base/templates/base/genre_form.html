@@ -1,0 +1,8 @@
+<h3>Dodawanie gatunku</h3>
+<a href="/genres"><h3>Powrót do listy gatunków</h3></a>
+
+<form method="POST" action="">
+    {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit" value="Dodaj">
+</form>

@@ -1,0 +1,32 @@
+<h1>Lista książek</h1>
+<a href="/"><h3>Powrót do wyboru produktu</h3></a>
+<table>
+    <tr>
+        <th>Numer</th>
+        <th>Tytuł</th>
+        <th>ISBN</th>
+        <th>Gatunek</th>
+        <th>Autor</th>
+        <th>Ilość</th>
+        <th>Opcje</th>
+    </tr>
+    {%for book in object_list%}
+        <tr>
+            <th>{{ book.id }} </th>
+            <th>{{ book.title }} </th>
+            <th>{{ book.isbn }} </th>
+            <th>{{ book.genre }} </th>
+            <th>{{ book.writer }} </th>
+            <th>{{ book.amount }} </th>
+            <th>
+                <a href="{% url 'book_update' book.id %}"><button {% if not perms.book.can_edit %} disabled {% endif %}>Edytuj</button></a>
+                <a href="{% url 'book_delete' book.id %}"><button {% if not perms.book.can_delete %} disabled {% endif %}>Usuń</button></a>
+            </th>
+        </tr>
+    {%empty%}
+        <h3>Brak dostępnych książek!</h3>
+    {%endfor%}
+
+</table>
+
+{% if perms.book.can_add %} <a href="/book-create"><h4>Dodaj książkę</h4></a> {% endif %}

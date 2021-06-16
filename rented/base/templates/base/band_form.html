@@ -1,0 +1,8 @@
+<h3>Dodawanie zespołu</h3>
+<a href="/bands"><h3>Powrót do listy zespołów</h3></a>
+
+<form method="POST" action="">
+    {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit" value="Dodaj">
+</form>

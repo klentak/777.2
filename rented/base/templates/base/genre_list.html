@@ -1,0 +1,23 @@
+<h1>Lista gatunków</h1>
+<a href="/"><h3>Powrót do wyboru produktu</h3></a>
+<table>
+    <tr>
+        <th>Numer</th>
+        <th>Tytuł</th>
+    </tr>
+    {%for genre in object_list%}
+        <tr>
+            <th>{{ genre.id }} </th>
+            <th>{{ genre.value }} </th>
+            <th>
+                <a href="{% url 'genre_update' genre.id %}"><button {% if not perms.genre.can_edit %} disabled {% endif %}>Edytuj</button></a>
+                <a href="{% url 'genre_delete' genre.id %}"><button {% if not perms.genre.can_delete %} disabled {% endif %}>Usuń</button></a>
+            </th>
+        </tr>
+    {%empty%}
+        <h3>Brak gatunków!</h3>
+    {%endfor%}
+
+</table>
+
+{% if perms.genre.can_add %} <a href="/genre-create"><h4>Dodaj gatunek</h4></a> {% endif %}

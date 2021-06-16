@@ -1,0 +1,24 @@
+<h1>Lista zespołów</h1>
+<a href="/"><h3>Powrót do wyboru produktu</h3></a>
+<table>
+    <tr>
+        <th>Numer</th>
+        <th>Nazwa</th>
+    </tr>
+    {%for band in object_list%}
+        <tr>
+            <th>{{ band.id }} </th>
+            <th>{{ band.name }} </th>
+            <th>
+                <a href="{% url 'band_update' band.id %}"><button {% if not perms.band.can_edit %} disabled {% endif %}>Edytuj</button></a>
+                <a href="{% url 'band_delete' band.id %}"><button {% if not perms.band.can_delete %} disabled {% endif %}>Usuń</button></a>
+            </th>
+        </tr>
+    {%empty%}
+        <h3>Brak zespołów</h3>
+    {%endfor%}
+
+</table>
+
+{% if perms.band.can_add %} <a href="/band-create"><h4>Dodaj zespół</h4></a> {% endif %}
+{% if perms.genre.can_add %} <a href="/genre-create"><h4>Dodaj gatunek</h4></a> {% endif %}

@@ -1,0 +1,12 @@
+<h3>Dodawanie płyty</h3>
+<a href="/cds"><h3>Powrót do listy płyt</h3></a>
+
+<form method="POST" action="">
+    {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit" value="Dodaj">
+</form>
+
+<a href="/band-create"><h3>Dodaj zespół</h3></a>
+
+{% if perms.genre.can_add %} <a href="/genre-create"><h4>Dodaj gatunek</h4></a> {% endif %}

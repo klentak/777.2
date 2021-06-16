@@ -1,0 +1,33 @@
+<h1>Lista płyt</h1>
+<a href="/"><h3>Powrót do wyboru produktu</h3></a>
+
+
+<table>
+    <tr>
+        <th>Numer</th>
+        <th>Tytuł</th>
+        <th>Gatunek</th>
+        <th>Zespół</th>
+        <th>Lista utworów</th>
+        <th>Ilość</th>
+        <th>Opcje</th>
+    </tr>
+    {%for cd in object_list%}
+        <tr>
+            <th>{{ cd.id }} </th>
+            <th>{{ cd.title }} </th>
+            <th>{{ cd.genre }} </th>
+            <th>{{ cd.band }} </th>
+            <th>{{ cd.song_list }} </th>
+            <th>{{ cd.amount }} </th>
+            <th>
+                <a href="{% url 'cd_update' cd.id %}"><button {% if not perms.cd.can_edit %} disabled {% endif %}>Edytuj</button></a>
+                <a href="{% url 'cd_delete' cd.id %}"><button {% if not perms.cd.can_delete %} disabled {% endif %}>Usuń</button></a>
+            </th>
+        </tr>
+    {%empty%}
+        <h3>Brak dostępnych płyt!</h3>
+    {%endfor%}
+</table>
+
+{% if perms.cd.can_add %} <a href="/cd-create"><h4>Dodaj płytę</h4></a> {% endif %}

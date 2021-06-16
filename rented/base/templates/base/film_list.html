@@ -1,0 +1,31 @@
+<h1>Lista filmów</h1>
+<a href="/"><h3>Powrót do wyboru produktu</h3></a>
+
+
+<table>
+    <tr>
+        <th>Tytuł</th>
+        <th>Gatunek</th>
+        <th>Reżyser</th>
+        <th>Czas trwania</th>
+        <th>Ilość</th>
+        <th>Opcje</th>
+    </tr>
+    {%for film in object_list%}
+        <tr>
+            <th>{{ film.title }} </th>
+            <th>{{ film.genre }} </th>
+            <th>{{ film.director }} </th>
+            <th>{{ film.duration }} </th>
+            <th>{{ film.amount }} </th>
+            <th>
+                <a href="{% url 'film_update' film.id %}"><button {% if not perms.film.can_edit %} disabled {% endif %}>Edytuj</button></a>
+                <a href="{% url 'film_delete' film.id %}"><button {% if not perms.film.can_delete %} disabled {% endif %}>Usuń</button></a>
+            </th>
+        </tr>
+    {%empty%}
+        <h3>Brak dostępnych filmów!</h3>
+    {%endfor%}
+</table>
+
+{% if perms.film.can_add %} <a href="/film-create"><h4>Dodaj film</h4></a> {% endif %}

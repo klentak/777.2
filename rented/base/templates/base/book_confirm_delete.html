@@ -1,0 +1,7 @@
+<a href="/bands">Wróć</a>
+
+<form method="POST">
+    {%csrf_token%}
+    <p>Jesteś pewien, że chech usunąć tą książkę? "{{ book }}"</p>
+    <input type="submit" value="Usuń" />
+</form>

@@ -1,0 +1,10 @@
+<h3>Dodawanie filmu</h3>
+<a href="/books"><h3>Powrót do listy filmów</h3></a>
+
+<form method="POST" action="">
+    {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit" value="Dodaj">
+</form>
+
+{% if perms.genre.can_add %} <a href="/genre-create"><h4>Dodaj gatunek</h4></a> {% endif %}
